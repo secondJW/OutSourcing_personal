@@ -3,12 +3,13 @@
 ### 1.구매자 회원가입
 POST http://localhost:8080/users
 Content-Type: application/json
+Cookie: Authorization=; RefreshToken=;
 
 {
-  "accountId": "consumer0",
-  "password": "Consumer0!",
-  "name": "구매자",
-  "email": "consumer@gmail.com",
+  "accountId": "consumer1",
+  "password": "Consumer0!!",
+  "name": "구매자fk",
+  "email": "consumer1@gmail.com",
   "userType" : "CONSUMER"
 }
 

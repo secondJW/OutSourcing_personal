@@ -1,9 +1,6 @@
 package com.sparta.mat_dil.service;
 
-import com.sparta.mat_dil.dto.FoodRequestDto;
-import com.sparta.mat_dil.dto.FoodResponseDto;
-import com.sparta.mat_dil.dto.RestaurantRequestDto;
-import com.sparta.mat_dil.dto.RestaurantResponseDto;
+import com.sparta.mat_dil.dto.*;
 import com.sparta.mat_dil.entity.Food;
 import com.sparta.mat_dil.entity.Restaurant;
 import com.sparta.mat_dil.entity.User;
@@ -17,7 +14,6 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,7 +35,7 @@ public class RestaurantService {
         Restaurant restaurant = new Restaurant(loginUser, requestDto);
 
         restaurantRepository.save(restaurant);
-
+        loginUser.updateRestaurantLikesCnt();
         return new RestaurantResponseDto(restaurant);
     }
 
@@ -62,11 +58,10 @@ public class RestaurantService {
      * @param id 페이지 개수
      * @return 음식점 정보
      **/
-    public RestaurantResponseDto getRestaurant(Long id) {
+    public SingleRestaurantResponseDto getRestaurant(Long id) {
         //음식점 확인 로직
         Restaurant restaurantInfo = this.findById(id);
-
-        return new RestaurantResponseDto(restaurantInfo);
+        return new SingleRestaurantResponseDto(restaurantInfo);
     }
 
 

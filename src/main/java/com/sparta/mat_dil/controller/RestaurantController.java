@@ -51,10 +51,11 @@ public class RestaurantController {
     * 특정 음식점 조회
     * @param id 음식점 id
     * @return status.code, message
+     * ++ 응답에 like 개수 추가
     **/
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseDataDto<RestaurantResponseDto>> getRestaurant(@PathVariable Long id) {
-        RestaurantResponseDto responseDto = restaurantService.getRestaurant(id);
+    public ResponseEntity<ResponseDataDto<SingleRestaurantResponseDto>> getRestaurant(@PathVariable Long id) {
+        SingleRestaurantResponseDto responseDto = restaurantService.getRestaurant(id);
         return ResponseEntity.ok(new ResponseDataDto<>(ResponseStatus.RESTAURANT_CHECK_SUCCESS, responseDto));
     }
 
@@ -85,7 +86,6 @@ public class RestaurantController {
     }
 
 
-
     //댓글 등록
     @PostMapping("/{restaurants_id}/comments")
     public ResponseEntity<ResponseDataDto<CommentResponseDto>> createComment(@PathVariable Long restaurants_id, @RequestBody CommentRequestDto requestDto,
@@ -104,9 +104,10 @@ public class RestaurantController {
     }
 
     //단일 댓글 조회
+    //응답에 likes 개수 추가
     @GetMapping("/{restaurantId}/comments/{commentId}")
-    public ResponseEntity<ResponseDataDto<CommentResponseDto>> getComment(@PathVariable Long restaurantId, @PathVariable Long commentId){
-        CommentResponseDto responseDto = commentService.getComment(restaurantId, commentId);
+    public ResponseEntity<ResponseDataDto<SingleCommentResponseDto>> getComment(@PathVariable Long restaurantId, @PathVariable Long commentId){
+        SingleCommentResponseDto responseDto = commentService.getComment(restaurantId, commentId);
 
         return ResponseEntity.ok(new ResponseDataDto<>(ResponseStatus.COMMENT_CHECK_SUCCESS, responseDto));
     }

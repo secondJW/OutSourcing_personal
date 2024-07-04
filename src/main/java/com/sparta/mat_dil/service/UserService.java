@@ -1,16 +1,15 @@
 package com.sparta.mat_dil.service;
 
-import com.sparta.mat_dil.dto.PasswordRequestDto;
-import com.sparta.mat_dil.dto.ProfileRequestDto;
-import com.sparta.mat_dil.dto.ProfileResponseDto;
-import com.sparta.mat_dil.dto.UserRequestDto;
+import com.sparta.mat_dil.dto.*;
 import com.sparta.mat_dil.entity.PasswordHistory;
 import com.sparta.mat_dil.entity.User;
 import com.sparta.mat_dil.entity.UserStatus;
 import com.sparta.mat_dil.enums.ErrorType;
 import com.sparta.mat_dil.exception.CustomException;
 import com.sparta.mat_dil.jwt.JwtUtil;
+import com.sparta.mat_dil.repository.CommentLikeRepository;
 import com.sparta.mat_dil.repository.PasswordHistoryRepository;
+import com.sparta.mat_dil.repository.RestaurantLikeRepository;
 import com.sparta.mat_dil.repository.UserRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,6 +30,8 @@ public class UserService {
     private final PasswordHistoryRepository passwordHistoryRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
+    private final CommentLikeRepository commentLikeRepository;
+    private final RestaurantLikeRepository restaurantLikeRepository;
 
 
     //회원가입
@@ -154,6 +155,7 @@ public class UserService {
     }
 
     public ProfileResponseDto getProfile(Long userId) {
+
         return new ProfileResponseDto(findById(userId));
     }
 

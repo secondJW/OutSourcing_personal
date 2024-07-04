@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface RestaurantLikeRepository extends JpaRepository<RestaurantLike, Long> {
+public interface RestaurantLikeRepository extends JpaRepository<RestaurantLike, Long>, RestaurantLikeRepositoryQuery{
     Optional<RestaurantLike> findByUserAndRestaurant(User user, Restaurant restaurant);
+    Long countById(Long userId);
+
 }
